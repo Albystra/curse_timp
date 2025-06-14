@@ -44,7 +44,6 @@ class SchoolJournal:
         self.content_frame = tk.Frame(self.root)
         self.content_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
-        # Show appropriate view based on role
         if self.current_role == "admin":
             self.show_admin_view()
         elif self.current_role == "teacher":
@@ -53,14 +52,11 @@ class SchoolJournal:
             self.show_student_view()
 
     def show_admin_view(self):
-        # Clear content frame
         for widget in self.content_frame.winfo_children():
             widget.destroy()
         
-        # Create admin view content
         ttk.Label(self.content_frame, text="Добро пожаловать, админ!", font=('Helvetica', 16, 'bold')).pack(pady=20)
         
-        # Add buttons for different admin functions
         functions = [
             ("Управление пользователями", self.manage_users),
             ("Управление предметами", self.manage_subjects),
@@ -78,10 +74,8 @@ class SchoolJournal:
         for widget in self.content_frame.winfo_children():
             widget.destroy()
         
-        # Create teacher view content
         ttk.Label(self.content_frame, text="Добро пожаловать, учитель!", font=('Helvetica', 16, 'bold')).pack(pady=20)
         
-        # Add buttons for different teacher functions
         functions = [
             ("Просмотр расписания", self.view_schedule),
             ("Добавление домашнего задания", self.add_homework),
@@ -94,14 +88,11 @@ class SchoolJournal:
             ttk.Button(self.content_frame, text=text, command=command).pack(pady=5)
 
     def show_student_view(self):
-        # Clear content frame
         for widget in self.content_frame.winfo_children():
             widget.destroy()
         
-        # Create student view content
         ttk.Label(self.content_frame, text="Добро пожаловать, ученик!", font=('Helvetica', 16, 'bold')).pack(pady=20)
         
-        # Add buttons for different student functions
         functions = [
             ("Просмотр расписания", self.view_schedule),
             ("Просмотр оценок", self.view_grades),
@@ -117,7 +108,6 @@ class SchoolJournal:
         dialog.geometry("300x200")
         dialog.resizable(False, False)
         
-        # Center the dialog
         dialog.update_idletasks()
         width = dialog.winfo_width()
         height = dialog.winfo_height()
@@ -125,7 +115,6 @@ class SchoolJournal:
         y = (dialog.winfo_screenheight() // 2) - (height // 2)
         dialog.geometry(f'{width}x{height}+{x}+{y}')
         
-        # Create widgets
         ttk.Label(dialog, text="Смена пароля", font=('Helvetica', 12, 'bold')).pack(pady=10)
         
         old_password_frame = ttk.Frame(dialog)
@@ -146,7 +135,6 @@ class SchoolJournal:
         confirm_password_entry = ttk.Entry(confirm_password_frame, show="*")
         confirm_password_entry.pack(side=tk.LEFT, fill=tk.X, expand=True)
         
-        # Add change button
         ttk.Button(dialog, text="Сменить пароль", command=lambda: self.change_password(
             old_password_entry.get(),
             new_password_entry.get(),
@@ -188,7 +176,6 @@ class SchoolJournal:
         login_view = LoginView(self.on_login_success)
         login_view.run()
 
-    # Placeholder methods for different functions
     def manage_users(self):
         UserManagementView(self.root)
     
