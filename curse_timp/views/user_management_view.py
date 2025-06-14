@@ -217,6 +217,10 @@ class UserManagementView:
                 messagebox.showwarning("Предупреждение", "Пожалуйста, введите пароль.")
                 return
             
+            if password and len(password) <= 3:
+                messagebox.showwarning("Предупреждение", "Пароль должен быть длиннее 3 символов.")
+                return
+            
             if role == "teacher" and not subject:
                 messagebox.showwarning("Предупреждение", "Пожалуйста, выберите предмет.")
                 return

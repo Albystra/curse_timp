@@ -159,6 +159,10 @@ class SchoolJournal:
             messagebox.showerror("Ошибка", "Пожалуйста, заполните все поля.")
             return
         
+        if len(new_password) <= 3:
+            messagebox.showerror("Ошибка", "Новый пароль должен быть длиннее 3 символов.")
+            return
+        
         if new_password != confirm_password:
             messagebox.showerror("Ошибка", "Новый пароль и подтверждение пароля не совпадают.")
             return
