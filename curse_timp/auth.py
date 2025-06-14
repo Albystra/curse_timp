@@ -51,7 +51,7 @@ class AuthManager:
             users = {}
         
         if username in users:
-            return False, "Username already exists"
+            return False, "Такой логин уже существует."
         
         users[username] = {
             "password": self._hash_password(password),
@@ -59,20 +59,20 @@ class AuthManager:
         }
         
         self.crypto.save_encrypted_file(self.users_file, users)
-        return True, "User registered successfully"
+        return True, "Пользователь успешно зарегистрирован."
 
     def change_password(self, username, old_password, new_password):
         # Смена пароля
         users = self.crypto.load_encrypted_file(self.users_file)
         if not users or username not in users:
-            return False, "User not found"
+            return False, "Не удалось найти пользователя."
         
         if users[username]["password"] != self._hash_password(old_password):
-            return False, "Invalid old password"
+            return False, "Неверный старый пароль."
         
         users[username]["password"] = self._hash_password(new_password)
         self.crypto.save_encrypted_file(self.users_file, users)
-        return True, "Password changed successfully"
+        return True, "Пароль успешно изменён!"
 
     def get_all_users(self):
         # Список пользователей (админ)
@@ -85,8 +85,8 @@ class AuthManager:
         # Удаление пользователя (админ)
         users = self.crypto.load_encrypted_file(self.users_file)
         if not users or username not in users:
-            return False, "User not found"
+            return False, "Не удалось найти пользователя."
         
         del users[username]
         self.crypto.save_encrypted_file(self.users_file, users)
-        return True, "User deleted successfully" 
+        return True, "Пользователь успешно удалён." 
